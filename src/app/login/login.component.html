@@ -1,0 +1,10 @@
+<h3>Login Page</h3>
+<ng-container *ngIf="!isLogged; else loggedout">
+    <p>you are currently not Login. please Click the below button to login</p>
+    <button (click)="login()">Log in</button>
+</ng-container>
+
+<ng-template #loggedout>
+    <p>you are currently Logged in. please Click the below button to log out</p>
+    <button (click)="logout()">Log out</button>
+</ng-template>
