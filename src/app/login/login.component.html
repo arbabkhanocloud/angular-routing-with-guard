@@ -1,10 +1,54 @@
 <h3>Login Page</h3>
 <ng-container *ngIf="!isLogged; else loggedout">
     <p>you are currently not Login. please Click the below button to login</p>
-    <button (click)="login()">Log in</button>
 </ng-container>
 
 <ng-template #loggedout>
     <p>you are currently Logged in. please Click the below button to log out</p>
     <button (click)="logout()">Log out</button>
 </ng-template>
+
+<!-- template driven form validtion through directives -->
+<!-- <div class="Login-page" *ngIf="!isLogged">
+    <form action="" (submit)=" onsubmit()">
+        <div class="username">
+            <label for="username">Username</label>
+            <input name="username" required minlength="1" type="email" class="form-control" appForbiddenName="bob"
+                #name="ngModel" [(ngModel)]="formObject.name">
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+            <div *ngIf="name.errors?.['required']">Name is required.</div>
+            <div *ngIf="name.errors?.['minlength']">
+                Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="name.errors?.['forbiddenName']">
+                Name cannot be Bob.
+            </div>
+        </div>
+        <div class="passord">
+            <label for="password">Password</label>
+            <input type="text" name="password" [(ngModel)]="formObject.password">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div> -->
+
+
+<form [formGroup]="loginForm" (ngSubmit)="onsubmit()" *ngIf="!isLogged">
+    <label for="username">User name</label>
+    <input type="text" id="username" formControlName="name">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" formControlName="email">
+
+    <label for="password">Password</label>
+    <input type="text" id="password" formControlName="password">
+
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>
+
+<p *ngIf="!isLogged">Form Values: {{ loginForm.value.name }}</p>
+
+<p *ngIf="!isLogged">Form Status: {{ loginForm.status }}</p>
+
+<p *ngIf="!isLogged">Form Errors: {{ loginForm.errors }}</p>

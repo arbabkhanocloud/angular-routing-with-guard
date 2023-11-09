@@ -14,3 +14,10 @@ button {
     text-shadow: 0 1px 0 #ffffff;
     outline: 0;
 }
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
